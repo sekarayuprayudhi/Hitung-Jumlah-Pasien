@@ -1,0 +1,21 @@
+import pandas as pd
+import glob
+
+folder_path = "C:\Exercise\datakreatininfilter2025"
+
+excel_files = glob.glob(folder_path + "/*.xlsx")
+
+df_list = []
+
+for file in excel_files:
+    df = pd.read_excel(file)
+    df_list.append(df)
+
+lt_all = pd.concat(df_list, ignore_index=True)
+
+
+jumlah_pasien_kreatinin = lt_all[
+    lt_all['Test Name'].str.contains('Kreatinin Darah')
+].shape[0]
+
+print("Jumlah pasien tes kreatinin:", jumlah_pasien_kreatinin)
